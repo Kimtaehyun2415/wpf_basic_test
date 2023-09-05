@@ -6,34 +6,52 @@
         xmlns:local="clr-namespace:wpf_basic_app1"
         xmlns:my_dtct="clr-namespace:wpf_basic_app1.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="400" Width="600">
     <Window.DataContext>
         <my_dtct:MyViewMdoel/>
     </Window.DataContext>
+    <Window.CommandBindings>
+        <CommandBinding Command="Help" CanExecute="CommandBinding_CanExecute" Executed="CommandBinding_Executed"/>
+    </Window.CommandBindings>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="3*"/>
+            <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Button Content="Log" Margin="10,58,39,108" Grid.Row="2" Click="Button_Click" RenderTransformOrigin="0.5,0.5">
-            <Button.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleY="1"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Button.RenderTransform>
-        </Button>
-        <DataGrid d:ItemsSource="{d:SampleData ItemCount=10}" Margin="16,18,317,64" Grid.ColumnSpan="3" Grid.RowSpan="2"/>
-        <PasswordBox Margin="16,101,133,10" Grid.ColumnSpan="2" Grid.Row="1"/>
-        <TextBox TextWrapping="Wrap" Text="{Binding Obser_coll[0]}" Margin="98,45,132,64" TextChanged="TextBox_TextChanged" Grid.Column="2" Grid.RowSpan="2"/>
-        <Button Content="Button" Margin="31,58,142,114" Grid.Row="2" Grid.Column="1"/>
+        
+        <Menu VerticalAlignment="Top">
+            <MenuItem Header="복사" Command="Copy"></MenuItem>
+            <MenuItem Header="붙여넣기" Command="Paste"></MenuItem>
+            <MenuItem Header="잘라내기" Command="Cut"></MenuItem>
+            <MenuItem Header="도움말" Command="Help"></MenuItem>
+        </Menu>
+        <StackPanel Margin="30">
+            <TextBox x:Name="txtInput" HorizontalAlignment="Left" Width="200px" Height="30px"></TextBox>
+            <Button x:Name="btnCut" Content="잘라내기"
+                    Command="Cut" CommandTarget="{Binding ElementName=txtInput}"></Button>
+            <Button x:Name="btnPaste" Content="붙여넣기"
+                    Command="Paste" CommandTarget="{Binding ElementName=txtInput}"></Button>
+            <!-- <Calendar x:Name="Calender_"></Calendar> -->
+            <TextBox x:Name="txtSource" HorizontalAlignment="Left" Width="150" Height="30" Margin="5"
+                     Text="{Binding Path=SelectedDate, StringFormat=\{0:yyyy-MM-dd\},
+                     ElementName=Calender_, UpdateSourceTrigger=PropertyChanged}">
+            </TextBox>
+            <TextBox x:Name="txtTarget" HorizontalAlignment="Left" Width="150" Height="30" Margin="5"
+                     Text="{Binding Path=Text, Mode=Default, ElementName=txtSource, UpdateSourceTrigger=Explicit}">
+            </TextBox>
+            <Button x:Name="btn_up" Width="150" Height="40" Margin="5" Content="source update"
+                    HorizontalAlignment="Left" Click="btn_up_Click"></Button>
+
+            <!-- passwordBox test [note : password binding 금지!! -->
+            <Label>ID:</Label>
+            <TextBox HorizontalAlignment="Left" Width="200"/>
+            <Label>password :</Label>
+            <PasswordBox x:Name="Passbox" MaxLength="10" PasswordChar="●" HorizontalAlignment="Left" Width="200"/>
+
+        </StackPanel>
+
     </Grid>
+
 </Window>

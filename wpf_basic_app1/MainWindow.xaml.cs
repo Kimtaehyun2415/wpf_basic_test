@@ -27,32 +27,23 @@ namespace wpf_basic_app1
 
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void CommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            TextBox txt_log = sender as TextBox;
-
-
-            if (true)
+            if(txtInput != null && txtInput.Text.Length >= 3)
             {
-                txt_log.Text = txt_log.Text.Trim();
-                txt_log.Text = "Button_log_Click";
+                e.CanExecute = true;
             }
         }
 
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            Button btn = sender as Button;
-            MessageBox.Show($"{btn.Name} 클릭 되었습니다.");
-
-            Func<bool, bool, bool> func_cmd = NetworkFunction;
-
+            MessageBox.Show("실행할 코드를 3자리 이상 입력하시오");
         }
 
-        public static bool NetworkFunction(bool input_btn, bool output_btn)
+        private void btn_up_Click(object sender, RoutedEventArgs e)
         {
-            bool btn_log_start = input_btn;
-            return btn_log_start;
+            BindingExpression source_clickevent = txtTarget.GetBindingExpression(TextBox.TextProperty);
+            source_clickevent.UpdateSource();
         }
     }
 }

@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace wpf_basic_app1.Model
 {
@@ -11,4 +13,7 @@ namespace wpf_basic_app1.Model
     {
         public event PropertyChangedEventHandler PropertyChanged;
     }
+
+
+
 }

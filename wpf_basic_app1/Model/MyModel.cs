@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,5 +17,6 @@ namespace wpf_basic_app1.Model
 
         public string Data { get => data; set => data = value; }
         public ObservableCollection<string> Obser_coll { get => obser_coll; set => obser_coll = value; }
+
     }
 }
